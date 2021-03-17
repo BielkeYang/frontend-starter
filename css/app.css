@@ -1,0 +1,156 @@
+/**
+ * Application-specific CSS.
+ * (c) 2021
+ */
+
+/**
+* Imports
+*/
+
+@import './includes/fonts.css';
+@import "./includes/animations.css";
+@import "./includes/arrows.css";
+@import "./includes/cookies.css";
+@import "./includes/containers.css";
+@import "./includes/content.css";
+@import "./includes/fader.css";
+@import "./includes/footer.css";
+@import "./includes/general.css";
+@import "./includes/header.css";
+@import "./includes/headers.css";
+@import "./includes/lazyload.css";
+@import "./includes/lightbox.css";
+@import "./includes/modules.css";
+@import "./includes/newsletter.css";
+@import "./includes/panners.css";
+@import "./includes/paragraphs.css";
+@import "./includes/popup.css";
+@import "./includes/navigation.css";
+
+@europa arrows;
+@europa base;
+
+/* lazyload fix for chrome. sometimes IntersectionObserver doesn't pick up the image */
+img[data-src], img[data-srcset] { min-height: 1px; min-width: 100%; }
+
+.no-js body.unloaded {
+  opacity: 1;
+}
+
+.no-js body.unloaded header {
+  opacity: 1;
+}
+
+.no-js body.unloaded .navbar {
+  transform: none;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+@responsive <=mobile {
+  ul li {
+    list-style-position: inside;
+  }
+}
+
+a.plain {
+  color: inherit;
+  border: none;
+  text-decoration: none;
+
+  &:hover {
+    border: none;
+    text-decoration: none;
+  }
+}
+
+.no-js body.unloaded {
+  [data-moonwalk],
+  [data-moonwalk-section],
+  [data-moonwalk-run] {
+    opacity: 1;
+  }
+}
+
+/** css moonwalk **/
+html.moonwalk {
+  [data-moonwalk=""] {
+    transform: translateY(0);
+    transition: transform 0.45s cubic-bezier(0.39, 0.575, 0.565, 1),
+                 opacity 0.45s cubic-bezier(0.47, 0, 0.745, 0.715);
+    transition-delay: 0.02s;
+    opacity: 0;
+
+    &.moonwalked {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  [data-moonwalk="panner"] {
+    transform: translateX(0);
+    transition: transform 0.45s cubic-bezier(0.39, 0.575, 0.565, 1),
+                 opacity 0.45s cubic-bezier(0.47, 0, 0.745, 0.715);
+    opacity: 0;
+
+    &.moonwalked {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+body {
+  @fontsize base;
+  @color fg body.foreground;
+  @color bg body.background;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.blink {
+  animation: blink-animation 2.7s steps(200, start) infinite;
+}
+
+@keyframes blink-animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: .8;
+  }
+}
+
+/* header {
+  opacity: 1;
+  transition: opacity 2s ease;
+} */
+
+.ft {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.c {
+  align-self: center;
+}
