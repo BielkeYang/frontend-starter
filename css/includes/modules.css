@@ -1,3 +1,195 @@
 [b-tpl] {
   @space padding-top block;
+
+  &[data-bleeds]:first-of-type {
+    @space! padding-top 0;
+  }
+}
+
+[b-tpl="hero"] {
+  position: relative;
+  width: 100%;
+
+  .bg {
+    width: 100%;
+    position: relative;
+
+    &:after {
+      @color bg black;
+      opacity: 0.1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: "";
+    }
+
+    img,
+    video {
+      width: 100%;
+    }
+  }
+
+  .content {
+    @space container;
+  }
+}
+
+[b-tpl="image"] {
+  @space container;
+
+  .inner {
+    figure[data-orientation="landscape"] {
+      @column 8/12 $lg;
+      @space padding-left 1:1/12 $lg;
+      margin: 0 auto;
+    }
+
+    figure[data-orientation="portrait"] {
+      @column 6/12 $lg;
+      @space padding-left 1:1/12 $lg;
+      margin: 0 auto;
+    }
+  }
+}
+
+[b-tpl="slider"] {
+  @space container;
+  @space! padding-top block_double $sm;
+  overflow-x: clip;
+
+  &:first-of-type {
+    @space! padding-top block_double $sm;
+  }
+
+  .heading {
+    @space margin-y block;
+
+    h2 {
+      @fontsize 18px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+    }
+  }
+
+  [data-looper] {
+    @display flex;
+    position: relative;
+    @responsive $sm {
+      align-items: flex-end;
+    }
+
+    @responsive desktop_xl/ipad_portrait {
+      @space margin-left -container;
+      @space margin-right -container;
+      @space padding-x container;
+      overflow-x: clip;
+
+      &:before {
+        z-index: 2;
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 6%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          rgb(35 8 8) 0%,
+          rgb(35 8 8 / 0.9903926402016152) 6.25%,
+          rgb(35 8 8 / 0.9619397662556434) 12.5%,
+          rgb(35 8 8 / 0.9157348061512727) 18.75%,
+          rgb(35 8 8 / 0.8535533905932737) 25%,
+          rgb(35 8 8 / 0.7777851165098011) 31.25%,
+          rgb(35 8 8 / 0.6913417161825449) 37.5%,
+          rgb(35 8 8 / 0.5975451610080642) 43.75%,
+          rgb(35 8 8 / 0.5) 50%,
+          rgb(35 8 8 / 0.4024548389919359) 56.25%,
+          rgb(35 8 8 / 0.3086582838174552) 62.5%,
+          rgb(35 8 8 / 0.22221488349019902) 68.75%,
+          rgb(35 8 8 / 0.14644660940672627) 75%,
+          rgb(35 8 8 / 0.08426519384872733) 81.25%,
+          rgb(35 8 8 / 0.03806023374435663) 87.5%,
+          rgb(35 8 8 / 0.009607359798384785) 93.75%,
+          rgb(35 8 8 / 0) 100%
+        );
+      }
+      &:after {
+        z-index: 2;
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 6%;
+        height: 100%;
+        background: linear-gradient(
+          -90deg,
+          rgb(35 8 8) 0%,
+          rgb(35 8 8 / 0.9903926402016152) 6.25%,
+          rgb(35 8 8 / 0.9619397662556434) 12.5%,
+          rgb(35 8 8 / 0.9157348061512727) 18.75%,
+          rgb(35 8 8 / 0.8535533905932737) 25%,
+          rgb(35 8 8 / 0.7777851165098011) 31.25%,
+          rgb(35 8 8 / 0.6913417161825449) 37.5%,
+          rgb(35 8 8 / 0.5975451610080642) 43.75%,
+          rgb(35 8 8 / 0.5) 50%,
+          rgb(35 8 8 / 0.4024548389919359) 56.25%,
+          rgb(35 8 8 / 0.3086582838174552) 62.5%,
+          rgb(35 8 8 / 0.22221488349019902) 68.75%,
+          rgb(35 8 8 / 0.14644660940672627) 75%,
+          rgb(35 8 8 / 0.08426519384872733) 81.25%,
+          rgb(35 8 8 / 0.03806023374435663) 87.5%,
+          rgb(35 8 8 / 0.009607359798384785) 93.75%,
+          rgb(35 8 8 / 0) 100%
+        );
+      }
+    }
+
+    [data-panner-item] {
+      @column 3:2/12 $lg;
+      @column 2:1/4 ipad_portrait;
+      @column 3:1/4 $mobile;
+      @space padding-right 1 $lg;
+      @space padding-right 2 $sm;
+
+      &:nth-of-type(6n + 1) {
+        @space margin-top 2.222vw $lg;
+      }
+
+      &:nth-of-type(6n + 3) {
+        @space padding-right 1 $lg;
+        @space margin-top 3.264vw $lg;
+      }
+
+      &:nth-of-type(6n + 5) {
+        @space padding-right 1 $lg;
+        @space margin-top 7.222vw $lg;
+      }
+
+      figure {
+        position: relative;
+      }
+
+      .info {
+        @space margin-top 1em;
+        text-transform: uppercase;
+        display: flex;
+        column-gap: 2.4em;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 15px; /* 100% */
+        letter-spacing: 1.2px;
+
+        h2 {
+          text-wrap: balance;
+        }
+      }
+    }
+  }
+}
+
+[data-panner-container],
+[data-looper-container] {
+  position: relative;
 }

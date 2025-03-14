@@ -1,0 +1,66 @@
+.swiper-container,
+.swiper-wrapper {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+}
+
+.swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+}
+
+.swiper-pagination {
+  @space right container $lg;
+  @space left container $sm;
+  @space bottom 60px $lg;
+  @space bottom 40px ipad_portrait;
+  @space bottom 40px $mobile;
+  z-index: 9;
+  position: absolute;
+}
+
+.swiper-pagination-bullet {
+  @space margin-x 2px;
+  font-weight: 600;
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  text-align: center;
+  line-height: 27px;
+
+  color: #fff;
+  opacity: 1;
+  border-radius: 50%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+  border: 1px solid #fff;
+}

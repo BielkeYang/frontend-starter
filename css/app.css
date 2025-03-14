@@ -1,37 +1,29 @@
 /**
  * Application-specific CSS.
- * (c) 2021
+ * (c) 2025
  */
 
 /**
 * Imports
 */
 
-@import './includes/fonts.css';
-@import "./includes/animations.css";
-@import "./includes/arrows.css";
+@import "./includes/fonts.css";
 @import "./includes/cookies.css";
-@import "./includes/containers.css";
-@import "./includes/content.css";
-@import "./includes/fader.css";
-@import "./includes/footer.css";
-@import "./includes/general.css";
-@import "./includes/header.css";
-@import "./includes/headers.css";
-@import "./includes/lazyload.css";
 @import "./includes/lightbox.css";
 @import "./includes/modules.css";
-@import "./includes/newsletter.css";
-@import "./includes/panners.css";
-@import "./includes/paragraphs.css";
-@import "./includes/popup.css";
 @import "./includes/navigation.css";
+@import "./includes/partials.css";
+/* @import "./includes/swiper.css"; */
 
 @europa arrows;
 @europa base;
 
 /* lazyload fix for chrome. sometimes IntersectionObserver doesn't pick up the image */
-img[data-src], img[data-srcset] { min-height: 1px; min-width: 100%; }
+img[data-src],
+img[data-srcset] {
+  min-height: 1px;
+  min-width: 100%;
+}
 
 .no-js body.unloaded {
   opacity: 1;
@@ -45,18 +37,14 @@ img[data-src], img[data-srcset] { min-height: 1px; min-width: 100%; }
   transform: none;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
+  overflow-x: clip;
 }
 
 svg:not(:root) {
   overflow: hidden;
-}
-
-@responsive <=mobile {
-  ul li {
-    list-style-position: inside;
-  }
 }
 
 a.plain {
@@ -78,49 +66,295 @@ a.plain {
   }
 }
 
-/** css moonwalk **/
 html.moonwalk {
   [data-moonwalk=""] {
     transform: translateY(0);
-    transition: transform 0.45s cubic-bezier(0.39, 0.575, 0.565, 1),
-                 opacity 0.45s cubic-bezier(0.47, 0, 0.745, 0.715);
-    transition-delay: 0.02s;
     opacity: 0;
 
     &.moonwalked {
       transform: translateY(0);
       opacity: 1;
       visibility: visible;
+      transition:
+        transform 350ms cubic-bezier(0.39, 0.575, 0.565, 1),
+        opacity 350ms cubic-bezier(0.47, 0, 0.745, 0.715);
+      transition-delay: 0.02s;
     }
   }
 
-  [data-moonwalk="panner"] {
-    transform: translateX(0);
-    transition: transform 0.45s cubic-bezier(0.39, 0.575, 0.565, 1),
-                 opacity 0.45s cubic-bezier(0.47, 0, 0.745, 0.715);
+  [data-moonwalk="r"] {
+    transform: translateX(15px);
     opacity: 0;
 
     &.moonwalked {
       transform: translateX(0);
       opacity: 1;
       visibility: visible;
+      transition:
+        transform 350ms cubic-bezier(0.39, 0.575, 0.565, 1),
+        opacity 350ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+  }
+
+  [data-moonwalk="l"] {
+    transform: translateX(-15px);
+    opacity: 0;
+
+    &.moonwalked {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      transition:
+        transform 350ms cubic-bezier(0.39, 0.575, 0.565, 1),
+        opacity 350ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+  }
+
+  [data-moonwalk="u"] {
+    transform: translateY(15px);
+    opacity: 0;
+
+    &.moonwalked {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      transition:
+        transform 350ms cubic-bezier(0.39, 0.575, 0.565, 1),
+        opacity 350ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+  }
+
+  [data-moonwalk="panner"] {
+    transform: translateX(0);
+    opacity: 0;
+
+    &.moonwalked {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+      transition:
+        transform 0.45s cubic-bezier(0.39, 0.575, 0.565, 1),
+        opacity 0.45s cubic-bezier(0.47, 0, 0.745, 0.715);
     }
   }
 }
 
 body {
   @fontsize base;
-  @color fg body.foreground;
   @color bg body.background;
+  @color fg body.foreground;
 
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
-p:last-child {
-  margin-bottom: 0;
+main {
+  min-height: 100vh;
+}
+
+p {
+  @space margin-bottom vertical-rhythm(theme.typography.sizes.base);
+
+  &:last-of-type {
+    margin-bottom: 0 !important;
+  }
+
+  > a {
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+
+    &:hover {
+      text-decoration-color: transparent;
+    }
+  }
+
+  > ul > li {
+    font-size: inherit;
+  }
+}
+
+.video-wrapper {
+  &.video-embed {
+    padding-bottom: calc(var(--aspect-ratio, 0.5625) * 100%);
+
+    video {
+      top: 0;
+      width: 100%;
+      position: absolute;
+      z-index: 1;
+    }
+
+    iframe {
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 3;
+    }
+  }
+
+  video {
+    width: 100%;
+  }
+}
+
+/** Smart video **/
+[data-smart-video] {
+  position: relative;
+  opacity: 0;
+  visibility: hidden;
+  aspect-ratio: var(--aspect-ratio-division);
+  background-color: #000000;
+  overflow: hidden;
+  @extend %border-radius;
+  transition: background-color 350ms ease;
+
+  &[data-play-button],
+  &[data-progress] {
+    video {
+      cursor: pointer;
+    }
+  }
+
+  &[data-can-play] {
+    video {
+      opacity: 1;
+    }
+  }
+
+  &[data-playing] {
+    background-color: transparent;
+  }
+
+  &[data-revealed] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  [data-cover] {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+
+    figure {
+      height: 100%;
+      width: 100%;
+
+      picture {
+        height: 100%;
+        width: 100%;
+
+        img {
+          aspect-ratio: var(--aspect-ratio-division);
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .video-play-button-wrapper {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    color: white;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 350ms ease;
+    pointer-events: none;
+    cursor: pointer !important;
+    opacity: 0;
+
+    .video-play-button {
+      font-family: sans-serif;
+      border: none;
+      font-size: 150px;
+    }
+  }
+
+  &[data-can-play] {
+    .video-play-button-wrapper {
+      opacity: 1;
+    }
+  }
+
+  &[data-playing] {
+    .video-play-button-wrapper {
+      opacity: 0;
+    }
+
+    .progress-bar-container {
+      opacity: 1;
+    }
+  }
+
+  .progress-bar-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    overflow: clip;
+    border-radius: 10px;
+    @space border-radius 6px $mobile;
+    opacity: 0;
+    transition: opacity 350ms ease;
+  }
+
+  .progress-bar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  media-player {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    border-radius: 10px;
+    aspect-ratio: var(--aspect-ratio-division);
+    overflow: hidden;
+    object-fit: contain;
+  }
+
+  video {
+    opacity: 0;
+    transition: opacity 550ms ease;
+  }
+}
+
+.no-js [data-smart-video] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/** Lazyload **/
+[data-ll-srcset] {
+  opacity: 0;
+  transition: opacity 350ms ease-in;
+
+  &[data-ll-srcset-initialized] {
+    opacity: 1;
+  }
+
+  img {
+    opacity: 0;
+    will-change: opacity;
+
+    &[data-ll-loaded] {
+      transition: opacity 350ms ease-in 50ms;
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
 }
 
 .blink {
@@ -137,14 +371,9 @@ p:last-child {
   }
 
   50% {
-    opacity: .8;
+    opacity: 0.8;
   }
 }
-
-/* header {
-  opacity: 1;
-  transition: opacity 2s ease;
-} */
 
 .ft {
   display: inline-block;
@@ -153,4 +382,40 @@ p:last-child {
 
 .c {
   align-self: center;
+}
+
+.display-sm {
+  @display none $lg;
+}
+
+.display-lg {
+  @display none $sm;
+}
+
+[data-dropdown-trigger] {
+  cursor: pointer;
+  span {
+    display: inline-block;
+    transform-origin: center 43%;
+    transition: transform 250ms ease;
+    transform: rotate(0deg);
+  }
+
+  &[data-dropdown-active] {
+    span.indicator {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+[data-dropdown-menu] {
+  display: none;
+}
+
+.zero-height {
+  height: 0;
+}
+
+span[class^="arrow-"] {
+  transition: all 350ms ease;
 }

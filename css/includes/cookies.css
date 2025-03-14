@@ -9,8 +9,8 @@
 }
 
 .cookie-container {
-  @color fg dark;
-  @color bg light;
+  color: #000;
+  background-color: #fff;
   display: none;
   position: fixed;
   bottom: 0;
@@ -18,7 +18,7 @@
   z-index: 9997;
   margin-bottom: 0 !important;
   max-width: 100% !important;
-  border-top: 1px solid theme(colors.dark);
+  border-top: 1px solid #000;
 
   @space padding-y 2xs;
 
@@ -31,7 +31,7 @@
 
     left: auto;
     border-radius: 15px;
-    border: 1px solid theme(colors.dark);
+    border: 1px solid #000;
   }
 
   .cookie-law {
@@ -87,20 +87,19 @@
     a {
       @extend .plain;
       @fontsize 14px;
-      @color fg dark;
+      color: #000;
     }
 
     button {
-      @color fg dark;
-      @color bg transparent;
-      @fontsize 16px;
+      font-size: 16px;
+      color: #000;
+      background-color: transparent;
       padding: 3px 25px 4px;
       border-radius: 10px;
-      border: 1px solid theme(colors.dark);
+      border: 1px solid #000;
 
       &:hover {
-        @color fg light;
-        @color bg dark;
+        color: #000;
       }
 
       @responsive >=ipad_portrait {

@@ -1,8 +1,118 @@
-/**
-Partials
+%link {
+  border-bottom: none;
+  transition: text-decoration-color 250ms ease;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 
-%h1 {
-  @fontsize 55px;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    border-bottom: none;
+  }
 }
 
-*/
+%link-border {
+  border-bottom: 1px solid currentColor;
+  transition: border-bottom-color 250ms ease;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+}
+
+%link-inverted {
+  border-bottom: none;
+  transition: text-decoration-color 250ms ease;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    text-underline-offset: 3px;
+  }
+}
+
+figcaption {
+  @space margin-top 0.6em;
+  @fontsize 16px;
+
+  &:empty {
+    @display none;
+  }
+
+  p {
+    max-width: 40ch;
+    text-wrap: balance;
+  }
+}
+
+%hoverzoom {
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+  }
+  .picture-wrapper {
+    overflow: hidden;
+    img {
+      transition:
+        transform 750ms ease,
+        opacity 350ms ease !important;
+    }
+  }
+}
+
+span[class^="arrow-"] {
+  @font main;
+}
+
+[data-eq-height-images] {
+  @responsive $lg {
+    align-items: flex-start !important;
+    figure {
+      height: auto;
+    }
+
+    img {
+      object-fit: contain;
+      object-position: center bottom;
+    }
+  }
+}
+
+[data-loader-param-selected] {
+  border-bottom: 1px solid currentColor;
+}
+
+%action {
+  border-bottom: 1px solid currentColor;
+  transition: border-bottom-color 250ms ease;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  &:after {
+    display: inline-block;
+    margin-left: 0.3em;
+    content: "→";
+    transition: transform 350ms ease;
+  }
+
+  &:hover {
+    &:after {
+      transform: translateX(0.1em);
+    }
+  }
+}

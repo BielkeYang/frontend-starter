@@ -1,37 +1,26 @@
+.no-js header[data-nav] nav section ul li a {
+  color: white;
+}
+
+.no-js [data-script="about"] header[data-nav] nav section ul li a {
+  color: black;
+}
+
 .no-js {
-  header {
-    background-color: theme(colors.light) !important;
-    color: theme(colors.dark) !important;
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
+  header[data-nav] {
+    background-color: transparent !important;
+    color: theme(colors.light) !important;
+    /* padding-top: 30px !important;
+    padding-bottom: 30px !important; */
+    position: absolute;
 
     nav {
-      figure.brand {
-        svg {
-          path {
-            fill: #000 !important;
-          }
-        }
+      article.brand {
+        @color fg white;
       }
 
       figure.menu-button {
         top: 0;
-      }
-
-      @responsive >=desktop_md {
-        section {
-          ul {
-            li {
-              a {
-                color: theme(colors.dark) !important;
-
-                &:hover {
-                  border-bottom: 1px solid black;
-                }
-              }
-            }
-          }
-        }
       }
     }
 
