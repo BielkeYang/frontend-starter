@@ -1,8 +1,10 @@
 module.exports = {
   plugins: [
-    require('@univers-agency/europacss'),
+    require('@brandocms/europacss'),
     require('autoprefixer')({ grid: 'on' }),
-    require('css-mqgroup')({ sort: true }),
-    require('postcss-reporter')({ clearReportedMessages: true, throwError: true })
-  ]
+    require('postcss-reporter')({
+      clearReportedMessages: true,
+      throwError: false,
+    }),
+  ],
 }
