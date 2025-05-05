@@ -111,10 +111,7 @@ module.exports = {
           iphone: '18px',
           mobile: '18px',
           ipad_portrait: '18px',
-          ipad_landscape: '20dpx',
-          desktop_md: '20dpx',
-          desktop_lg: '20dpx',
-          desktop_xl: '20dpx',
+          '*': '20dpx',
         },
       },
 
