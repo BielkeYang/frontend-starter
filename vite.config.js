@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import legacy from '@vitejs/plugin-legacy'
+import eslint from 'vite-plugin-eslint'
 
 function HMREuropa() {
   return {
@@ -20,9 +21,15 @@ function HMREuropa() {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: './',
   server: {
+    host: 'localhost',
     port: 3000,
+    cors: 'localhost', // or mysite.test for craft installs
+    hmr: {
+      port: 3000,
+    },
   },
   css: {
     devSourcemap: true,
@@ -50,5 +57,14 @@ export default defineConfig({
     },
   },
 
-  plugins: [HMREuropa(), legacy({})],
-})
+  plugins: [
+    HMREuropa(),
+    eslint({
+      failOnError: command === 'build', // ⬅️ break only on `vite build`
+      failOnWarning: false,
+      cache: false,
+    }),
+
+    legacy({}),
+  ],
+}))

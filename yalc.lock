@@ -2,13 +2,8 @@
   "version": "v1",
   "packages": {
     "@univers-agency/panama": {
-      "signature": "41029fc0de595a53440583e79d0ce783",
+      "signature": "3497d5ecf24fb311347b5cf4fa515b11",
       "file": true
-    },
-    "@brandocms/europacss": {
-      "signature": "2eab9fda77e81baa80e98a6d8667caea",
-      "file": true,
-      "replaced": "^0.13.1"
     }
   }
 }
