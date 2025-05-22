@@ -1,9 +1,6 @@
-import { Dom, gsap } from '@brandocms/jupiter'
-import { SplitText } from '../modules/SplitText'
+// import { Dom, gsap } from '@brandocms/jupiter'
 
-gsap.registerPlugin(SplitText)
-
-export default (app) => ({
+export default _app => ({
   rootMargin: '0% 0% -2% 0%',
   threshold: 0,
   initialDelay: 100,
