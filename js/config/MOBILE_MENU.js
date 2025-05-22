@@ -1,6 +1,6 @@
 import { Dom, gsap } from '@brandocms/jupiter'
 
-export default app => ({
+export default _app => ({
   logoColor: '#000',
   logoPathSelector: 'svg path',
   contentSelector: 'section.main',
@@ -13,33 +13,35 @@ export default app => ({
   },
 
   openTween: m => {
-    const timeline = gsap.timeline()
+    const timeline = gsap.timeline({ defaults: { overwrite: 'auto' } })
 
     m.hamburger.classList.toggle('is-active')
     document.body.classList.toggle('open-menu')
     const hamburger = Dom.find('#menu .hamburger')
-    const main = Dom.find(m.header, '.main .menu')
+    const hamburgerText = Dom.find(hamburger, '.hamburger-text')
+    const main = Dom.find(m.header, '.main')
 
     timeline
       .set(m.lis, {
-        opacity: 0
+        opacity: 0,
       })
       .call(() => {
         // set hamburger text
         const newText = hamburger.dataset.closeText
-        const currentText = hamburger.innerHTML.trim()
+        const currentText = hamburgerText.innerHTML.trim()
+
         let timeoutIterator = 0
         for (let i = currentText.length; i >= 0; i -= 1) {
           timeoutIterator++
           setTimeout(() => {
-            hamburger.innerHTML = currentText.slice(0, i)
+            hamburgerText.innerHTML = currentText.slice(0, i)
           }, 25 * timeoutIterator)
         }
 
         for (let i = 0; i <= newText.length; i += 1) {
           timeoutIterator++
           setTimeout(() => {
-            hamburger.innerHTML = newText.slice(0, i)
+            hamburgerText.innerHTML = newText.slice(0, i)
           }, 25 * timeoutIterator)
         }
       })
@@ -48,15 +50,14 @@ export default app => ({
         m.bg,
         {
           duration: 0.35,
-          x: 0,
           opacity: 0,
-          height: window.innerHeight
+          height: window.innerHeight,
         },
         {
           display: 'block',
           duration: 0.35,
           opacity: 1,
-          ease: 'sine.in'
+          ease: 'none',
         }
       )
       .set(main, { display: 'flex' })
@@ -66,7 +67,7 @@ export default app => ({
           duration: 1,
           opacity: 1,
           ease: 'power3.out',
-          stagger: 0.05
+          stagger: 0.05,
         },
         '<'
       )
@@ -76,25 +77,26 @@ export default app => ({
   closeTween: m => {
     const timeline = gsap.timeline()
     const hamburger = Dom.find('#menu .hamburger')
-    const main = Dom.find(m.header, '.main .menu')
+    const hamburgerText = Dom.find(hamburger, '.hamburger-text')
+    const main = Dom.find(m.header, '.main')
 
     timeline
       .call(() => {
         // set hamburger text
         const newText = hamburger.dataset.openText
-        const currentText = hamburger.innerHTML.trim()
+        const currentText = hamburgerText.innerHTML.trim()
         let timeoutIterator = 0
         for (let i = currentText.length; i >= 0; i -= 1) {
           timeoutIterator++
           setTimeout(() => {
-            hamburger.innerHTML = currentText.slice(0, i)
+            hamburgerText.innerHTML = currentText.slice(0, i)
           }, 25 * timeoutIterator)
         }
 
         for (let i = 0; i <= newText.length; i += 1) {
           timeoutIterator++
           setTimeout(() => {
-            hamburger.innerHTML = newText.slice(0, i)
+            hamburgerText.innerHTML = newText.slice(0, i)
           }, 25 * timeoutIterator)
         }
       })
@@ -107,8 +109,8 @@ export default app => ({
       .to(m.bg, {
         duration: 0.25,
         opacity: 0,
-        ease: 'sine.in'
+        ease: 'sine.in',
       })
       .set(m.nav, { clearProps: 'height' })
-  }
+  },
 })
